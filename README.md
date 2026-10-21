@@ -29,4 +29,4 @@ python -m unittest discover -s tests -v
 3. 提交前本地跑通单元测试，推送后创建 Pull Request；
 4. 至少一名同伴 Review 后合并到 `main`，并删除临时分支。
 
-当前版本：v0.2
+当前版本：v0.3

@@ -35,9 +35,14 @@ class ScoreBook:
         return passed / len(self._students)
 
     def rank(self):
-        """按分数从高到低排名，返回 [(名次, 姓名, 分数), ...]。"""
+        """按分数从高到低排名；同分并列，下一名次顺延（如 1、1、3）。"""
         ordered = sorted(self._students, key=lambda s: s["score"], reverse=True)
-        return [(i, s["name"], s["score"]) for i, s in enumerate(ordered, 1)]
+        ranked = []
+        for i, s in enumerate(ordered):
+            tied = i > 0 and s["score"] == ordered[i - 1]["score"]
+            place = ranked[-1][0] if tied else i + 1
+            ranked.append((place, s["name"], s["score"]))
+        return ranked
 
     def export_csv(self, path):
         """把全部成绩导出为 CSV 文件，返回导出的记录条数。"""

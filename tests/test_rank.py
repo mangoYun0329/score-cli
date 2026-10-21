@@ -21,6 +21,16 @@ class TestRank(unittest.TestCase):
     def test_rank_empty(self):
         self.assertEqual(ScoreBook().rank(), [])
 
+    def test_rank_tie(self):
+        book = ScoreBook()
+        book.add("张三", 90)
+        book.add("李四", 90)
+        book.add("王五", 80)
+        self.assertEqual(
+            book.rank(),
+            [(1, "张三", 90), (1, "李四", 90), (3, "王五", 80)],
+        )
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

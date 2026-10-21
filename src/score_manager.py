@@ -39,6 +39,14 @@ class ScoreBook:
         ordered = sorted(self._students, key=lambda s: s["score"], reverse=True)
         return [(i, s["name"], s["score"]) for i, s in enumerate(ordered, 1)]
 
+    def export_csv(self, path):
+        """把全部成绩导出为 CSV 文件，返回导出的记录条数。"""
+        with open(path, "w", encoding="utf-8-sig", newline="") as f:
+            f.write("姓名,分数\n")
+            for s in self._students:
+                f.write("%s,%s\n" % (s["name"], s["score"]))
+        return self.count
+
 
 if __name__ == "__main__":
     book = ScoreBook()

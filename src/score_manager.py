@@ -34,6 +34,11 @@ class ScoreBook:
         passed = sum(1 for s in self._students if s["score"] >= 60)
         return passed / len(self._students)
 
+    def rank(self):
+        """按分数从高到低排名，返回 [(名次, 姓名, 分数), ...]。"""
+        ordered = sorted(self._students, key=lambda s: s["score"], reverse=True)
+        return [(i, s["name"], s["score"]) for i, s in enumerate(ordered, 1)]
+
 
 if __name__ == "__main__":
     book = ScoreBook()
